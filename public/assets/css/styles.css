@@ -1,0 +1,50 @@
+    /* -- Body -- */
+    html {
+        height: 100%;
+    }
+    body {
+        min-height: 100%;
+        /* padding-bottom: 150px; // de la hauteur de ton footer */
+    }
+
+    .titre{
+        color: bisque;
+    }
+    nav{
+        z-index: 1;
+        /* align-items: center; */
+    }
+
+    .text{
+        color: bisque;
+    }
+
+    .bgH{
+
+        max-width: 100% ;
+        height: auto;
+        filter: opacity(0.20);
+        /* filter: blur(4px); */
+    }
+
+    /* display: flex; */
+    /* -- Body -- */
+
+
+
+/* -- boutton inscription -- */
+
+
+
+
+
+
+
+.detailProd{
+    flex: content;
+    align-items: end;
+}
+
+
+/* -- boutton inscription -- */
+

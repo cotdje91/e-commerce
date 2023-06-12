@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des produits{% endblock %}
+
+{% block body %}
+<main class="container bg-dark">
+    <section class="row">
+        <div class="col-md-12">
+            <h1 class"text-white">Ajouter un produit</h1>
+            {% include "admin/products/_form.html.twig" %}
+        </div>
+    </section>
+</main>
+
+
+{% endblock %}

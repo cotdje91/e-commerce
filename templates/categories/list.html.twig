@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits de la categorie {{ category.name}}{% endblock %}
+
+{% block body %}
+
+<style>
+body{
+    background: darkblue;
+    background-size:cover;
+
+}
+
+.imgH1 {
+    position: relative;
+    overflow: hidden;
+    /* padding: 16px; */
+    /* border: 1px dashed green; */
+}
+.imgH1 h1 {
+    /* padding: 100px; */
+    position: relative;
+    z-index: 2;
+}
+.imgH1 .imgh1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+}
+section{
+    position: relative;
+    z-index: 2;
+}
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+.listProd{
+    background-color: #FF9000;
+}
+</style>
+    {# On fait un dump pour ce qu'on recupere apres avoir $products dans notre Categoriescontroller#}
+<div class="imgH1 col-md-12">
+    <img class="imgh1 bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class="container">
+        <section class="row">
+            <div class="col-md-12">
+                <h1 class="text-center text-white">Liste des produits de la categorie {{ category.name}}</h1>
+            </div>
+            {% for product in products %}
+                <div class="col-md-3 mb-3 h-50 w-25">
+                    <article class="card h-50">
+                        <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ product.images[0].name ) }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body listProd h-50">
+                            <h2 class="card-title">{{ product.name}}</h2>
+                            <p class="card-text text-dark">{{ product.description}}</p>
+                            <a href="{{path('products_details', {"slug": product.slug}) }}" class="btn btn-dark"> Voir les détails</a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+            {# {% set path = 'categories_list' %}
+            {% set slug = category.slug %} #}
+        </section>
+    </main>
+</div>
+{% endblock %}

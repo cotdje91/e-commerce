@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des produits
+{% endblock %}
+
+{% block body %}
+	<div class="container bg-dark">
+		<div class="row">
+			{% include "_includes/_adminnav.html.twig" %}
+			<main class="col-md-9 border border-light bg-white p-2">
+				<h1 class"text-white" >Liste des produits</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Photo</th>
+							<th>Nom</th>
+							<th>Prix</th>
+							<th>Stock</th>
+							<th>Catégorie</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for produit in produits %}
+							<tr>
+								<td>{{ produit.id }}</td>
+									{% if produit.images is empty %}
+										<p>Aucun visuel disponible pour ce produit</p> {# La Collection est vide, il y a kedal, nada, keutchi dedans, donc tu informes. Le mieux reste ensuite de gérer ça en amont si c'est obligatoire, donc via ton formulaire et les constraints. #}
+									{% else %}
+										<td><img src="{{ asset('assets/uploads/products/mini/300x300-' ~ produit.images|first.name) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
+									{% endif %}
+								<td>{{ produit.name }}</td>
+								<td>{{ produit.price / 100 }}</td>
+								<td>{{ produit.stock }}</td>
+								<td>{{ produit.categories.name }}</td>
+								<td>
+									<a href="{{ path('admin_products_edit', {id: produit.id})}}" class="btn btn-success">Modifier</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</main>
+		</div>
+	</div>
+{% endblock %}

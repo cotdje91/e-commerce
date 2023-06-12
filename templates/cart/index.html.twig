@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+
+<style>
+body{
+    background: darkblue;
+    background-size:cover;
+
+}
+
+.imgH1 {
+    position: relative;
+    overflow: hidden;
+
+}
+.imgH1 h1 {
+    /* padding: 100px; */
+    position: relative;
+    z-index: 2;
+}
+.imgH1 img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+}
+
+footer{
+    position: relative;
+    z-index: 2;
+}
+</style>
+
+<div class="imgH1">
+        {% if cart|length > 0 %}
+
+        {% set fulTotal = 0 %}
+    <img class="bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class="container nopadding">
+        <form action="{{path('order_create')}}">
+        <div class="row">
+            <section class="card card-registration card-registration-2" style="">
+                <div class="p-5">
+                    <div class="monPanier">
+                        <h1 class="fw-bold center">Mon Panier</h1>
+                        <hr class="my-3">
+                        <div class="row">
+                            {% for product in cart %} 
+                            {{ form_start(form, {action:path('payment_add', {id: product.products.id})}) }}
+                            {% endfor %}
+                            {% for item in cart %}
+                            {% set subTotal = (item.products.price * item.quantity ) %}
+                            {% set fulTotal = fulTotal + subTotal %}
+                            {# <div class="col-md-2 col-lg-2 col-xl-2"> #}
+                                {# <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp" class="img-fluid rounded-3" alt="Cotton T-shirt"> #}
+                            {# </div> #}
+                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                <h6 class="text-muted">{{item.products.name}}</h6>
+                                <h6 class="text-black mb-0">{{item.products.description}}</h6>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                <a href="{{ path('cart_decrease', {id: item.products.id}) }}" class="btn btn-icon fs-xl" data-decrement><i class="fas fa-minus"></i></a>
+                                <input id="form1" min="0" name="quantity" value="{{ item.quantity }}" type="number" class="form-control form-control-sm" />
+                                <a href="{{ path('cart_add', {id: item.products.id})}}" class="btn btn-icon fs-xl" data-increment><i class="fas fa-plus"></i></a>
+                            </div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                <h6 class="mb-0" >{{(subTotal / 100)|number_format(2,',','.')}}€</h6>
+                            </div>
+                            <hr class="my-3">
+                        {% endfor %}
+                            <div class="pt-5">
+                                <h6 class="mb-0">
+                                    <a href="{{ path('products_index')}}" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Voir plus d'article</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monTotal">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Résumé</h3>
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-between mb-5">
+                            <h5 class="text-uppercase"> Prix Total </h5>
+                            <h5 class="fs-3 fw-semibold text-dark ms-2">{{ (fulTotal / 100)|number_format(2,',','.') }}€</h5>
+                        </div>
+                    </div>
+                        <button class="btn btn-lg btn-primary" type"submit" style="...">Payer via Stripe |
+                            {{ (fulTotal / 100)|number_format(2,',','.') }}€
+                        </button>
+                </div>
+            </section>
+        </div>
+    </main>
+    </form>
+</div>
+        {% else %}
+        <div class="container d-flex flex-column justify-content-center min-vh py-5">
+            <div class="text-center pt-4 mt-lg-2">
+                <h1 class="display-5 text-white">Ton panier est vide</h1>
+                <p class="fs-lg pb-mb-0 mb-md-5"> Fonce pour aller choisir tes articles ici !! :) </p>
+                <a class="btn btn-lg btn-primary" href="{{ path('products_index')}}">Voir les articles</a>
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}
+

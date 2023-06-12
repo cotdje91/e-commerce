@@ -1,0 +1,90 @@
+{# Pour afficher tout ce qu'il y a dans le fichier base.html #}
+{% extends 'base.html.twig' %}
+
+{% block title %}ACCUEIL{% endblock %}
+
+{% block body %}
+<style>
+body{
+    background: darkblue;
+}
+
+.log1, .log2 {
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 10px;
+    width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 0 20px rgba(104, 85, 224);
+    transition: 0.4s;
+}
+
+.log {
+    color: rgb(104, 85, 224);
+    /* background-color: rgba(255, 255, 255, 1); */
+    border: 3px solid rgba(104, 85, 224, 1);
+}
+
+.log1:hover {
+    color: white;
+    /* width: ; */
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+    background-color: rgba(104, 85, 224, 1);
+}
+
+.reg {
+    color: white;
+    background-color: rgb(243, 138, 27);
+}
+.imgH {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.imgH h1 {
+    padding: 100px; */
+    position: relative;
+    z-index: 2;
+}
+.imgH img {
+    position: absolute;
+    /* left: 0; */
+    /* top: 0; */
+    /* height: auto; */
+    opacity: 0.6;
+}
+
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+section{
+    position: relative;
+    z-index: 2;
+}
+</style>
+<body>
+<div class="imgH">
+    <img class="bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class="container nopadding">
+        <section class="row">
+            <div class="col-md-6 mb-3 hero-content text-center titreDiv">
+                <h1 class="titre text-white"> CHARLY EXPRESS✅</h1>
+                <p class="text fw-bold">Bienvenue sur notre site</p>
+                <p class="text fw-bold">Retrouvez une sélection des articles les plus tendances de ces derniers mois :
+                pantalons, vestes et parfums pour tous les goûts.
+                Nous vous proposons des choix variés, que ce soit de chez nous ou de vos sites internet préférés.</p>
+                <div>
+                    <button class="log log1"><a class="nav-link" href="{{path('app_login')}}">Login</a></button>
+                    <button class="reg log2" ><a class="nav-link" href="{{path('app_register')}}">Sign up</a></button>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<body>
+
+{% endblock %}

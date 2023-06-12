@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}création de la Commande{% endblock %}
+
+{% block body %}
+<style>
+body{
+    background: darkblue;
+    /* background-image: url('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp') ; */
+    /* opacity:0.20; */
+    background-size:cover;
+
+}
+
+.imgH {
+    position: relative;
+    overflow: hidden;
+    /* padding: 16px; */
+    /* border: 1px dashed green; */
+}
+.imgH h1 {
+    /* padding: 100px; */
+    position: relative;
+    z-index: 2;
+}
+.imgH img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+}
+
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+section{
+    position: relative;
+    z-index: 2;
+}
+</style>
+{% for product in recapCart %} 
+{{ form_start(form, {action:path('payment_add', {id: product.products.id})}) }}
+{% endfor %}
+
+<div class="imgH">
+    <img class="bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class="container nopadding p-5">
+<div class="d-none d-lg-block position-fixed top-0 start-0 h-100"></div>
+    <div class="container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="h2 pb-2 text-light">Création de commande</h1>
+                <h3 class="fs-base fw-normal text-body text-uppercase pb-1 pb-sm-1 text-light">
+                    <span class="text-decoration-underline ms-1 text-light">1. Shopping details</span>
+                </h3>
+                {# <p>Si vous n'avez pas d'adresse ajoute en une dans votre escce compte <a href="#"> Ajouter une adresse</p> #}
+                <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3 text-light">
+                    <span class="text-decoration-underline ms-1 text-light">2. Choisissez votre livraison</span></h3>
+                    {{ form_row(form.addresses)|replace({'[-br]' : '</br>'})|raw}}
+            </div>
+            <div class="col-lg-5 offset-lg-1 pt-1">
+                <h2 class="pb-2 pt-md-2 my-4 mt-lg-5 text-light">Récapitulatif de la commande<span class='fs-base fw-normal text-muted'>({{ recapCart|length}}produits)</span></h2>
+                {% set fulTotal = 0 %}
+                {% for product in recapCart %}
+                {% set subTotal = (product.products.price * product.quantity ) %}
+                {% set fulTotal = fulTotal + subTotal %}
+                <div class="d-sm-flex align-items-center border-top py-4">
+                    <div class="me-3" style="position: relative; top:15px;">
+                        <h3 class="h5 mb-2 text-light">{{product.products.name}}</h3>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-light"> Quantité : x{{product.quantity}} - Prix du produit:{{(subTotal / 100)|number_format(2,',','.')}}€</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="d-flex align-items-center justify-content-between border-top py-4 mb-4 text-light">
+                    Total:<spam class='fs-3 fw-semibold text-light ms-2'>{{ (fulTotal / 100)|number_format(2,',','.')}} €</spam>
+                </div>
+                <div class="mt-5 text-center">
+                <section class="checkout">
+                        <button class="btn btn_lg btn-primary" type="submit">Validez Votre commande</button>
+                </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </main>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}

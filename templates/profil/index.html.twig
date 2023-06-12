@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<style>
+body{
+    background: darkblue;
+    background-size:cover;
+
+}
+
+.imgH1 {
+    position: relative;
+    overflow: hidden;
+    /* padding: 16px; */
+    /* border: 1px dashed green; */
+}
+.imgH1 h1 {
+    /* padding: 100px; */
+    position: relative;
+    z-index: 2;
+}
+.imgH1 .imgh1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+}
+section{
+    position: relative;
+    z-index: 2;
+}
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+.listProd{
+    background-color: #FF9000;
+}
+</style>
+
+<div class="imgH1 col-md-12">
+    <img class="imgh1 bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class="container nopadding">
+        <div class="row">
+    <div class="example-wrapper">
+        <div class="container d-flex flex-column justify-content-center min-vh py-5">
+            <div class="text-center pt-4 mt-lg-2">
+                <h1 class="display-5">Mon compte</h1>
+                <p class="fs-lg pb-mb-0 mb-md-5">
+                    Salut à toi ! Tu te trouves actuellement sur ta page de profil.
+                    Ne panique pas si tu ne vois pas grand-chose, CHARLYEXPRESS ne t'abandonnera jamais.
+                    En effet, notre site est en maintenance pour être aussi stylé que toi. Si tu as besoin de renseignements,
+                    n'hésite pas à nous envoyer un e-mail à CHARLYEXPRESS@gmail.com.
+                    Nous te répondrons dans les plus brefs délais. :)
+                </p>
+
+                {# <a class="btn btn-lg btn-primary" href="{{path('payment_orders')}}">Mes commandes</a> #}
+            </div>
+        </div>
+    </div>
+    </div>
+    </main>
+</div>
+
+    <p></p>
+{% endblock %}

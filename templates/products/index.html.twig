@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+<style>
+body{
+    background: darkblue;
+}
+/* .bgH{
+    width: 200px;
+    margin-bottom: 200px;
+} */
+.imgH1 {
+    position: relative;
+    overflow: hidden;
+    /* width: 100%; */
+
+    /* position: absolute; */
+}
+.imgH1 h1 {
+    /* padding: 100px; */
+    /* z-index: 2; */
+}
+.imgH1 img {
+    position: absolute;
+    /* left: 0; */
+    /* top: 0; */
+    /* height: auto; */
+    opacity: 0.6;
+}
+
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+section{
+    position: relative;
+    z-index: 2;
+}
+
+.listProd{
+    background-color: #FF9000;
+}
+</style>
+
+
+<div class="imgH1">
+    <img class="bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" >
+    <main class=" container nopadding">
+        <section class="row">
+            <div class="col-md-12 ">
+                <h1 class="text-center text-white">Liste des produits</h1>
+                {% for category in categories %}
+                    {% if category.parent == null %}
+                        <div class="col-md-12 ">
+                            <h2 class="text-white">{{category.name}}</h2>
+                        </div>
+                    {% else %}
+                            <div class="card col-md-3 ">
+                                <div class="card-body listProd ">
+                                    <h3 class="card-title">{{category.name}}</h3>
+                                    {# Chemin controller = categories_list on fait une concatenation pour relier notre categorie a la liste #}
+                                    <a href="{{path('categories_list', {slug: category.slug}) }}" class="btn btn-dark">Voir les produits</a>
+                                </div>
+                            </div>
+                            <a href="#"></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
+
+{% endblock %}

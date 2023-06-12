@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product.name}}{% endblock %}
+
+
+{% block body %}
+<style>
+body{
+    background: darkblue;
+}
+
+.imgH1 {
+    position: relative;
+    overflow: hidden;
+    /* padding: 16px; */
+    /* border: 1px dashed green; */
+}
+.imgH1 h1 {
+    /* padding: 100px; */
+    /* position: relative;
+    z-index: 2; */
+}
+.imgH1 img {
+    position: absolute;
+    /* left: 0;
+    top: 0;
+    width: 100%;
+    height: auto; */
+    opacity: 0.6;
+}
+footer{
+    position: relative;
+    z-index: 2;
+}
+
+section{
+    position: relative;
+    z-index: 2;
+}
+
+
+.detailProd{
+
+}
+</style>
+
+<div class="imgH1">
+    {# <img class="bgH d-block w-100" src="{{asset('/assets/uploads/products/6fcf56946d753a0a73da5ed0842ea4e3.webp')}}" > #}
+    <main class=" container nopadding">
+        <section class="row">
+            <div class="col-md-10 mb-3">
+                    <h1 class="text-center text-white"> {{product.name}} </h1>
+                <div class="col-md-6">
+                    <div id="carouselExampleIndicators" class="carousel slide col-md-6 " data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in product.images %}
+                                    {# <img src="{{ asset('assets/uploads/products/mini/300x300-') ~ image.name }}" class="d-block w-100 imgFond" alt="{{ product.name }}"> #}
+                                    <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ product.images[0].name ) }}" class="card-img-top" alt="{{ product.name }}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 detailProd">
+                    <p> {{product.description}} </p>
+                    <p> Catégorie : {{product.categories.name}} </p>
+                    <p> Prix : {{product.Price / 100 }} €</p>
+                    {% if product.stock > 0 %}
+                        <a href="{{path('cart_add', {id: product.id})}}" class="btn btn-success">Ajouter au panier <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16"><path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1z"/></svg> </a>
+                    {% else %}
+                        <p class="text-danger"><strong>Nous sommes désolés, mais cet article est temporairement en rupture de stock</strong></p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}
